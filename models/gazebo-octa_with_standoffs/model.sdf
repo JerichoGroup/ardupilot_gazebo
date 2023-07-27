@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
 <sdf version='1.5'>
-  <model name='hedgehog'>
+  <model name='gazebo-octa'>
     <pose>0 0 0.194923 0 0 0</pose>
     <link name='base_link'>
       <velocity_decay>
@@ -44,7 +44,7 @@
       <visual name='base_link_visual'>
         <geometry>
           <mesh>
-            <uri>model://hedgehog_with_standoffs/meshes/iris.dae</uri>
+            <uri>model://gazebo-octa_with_standoffs/meshes/iris.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -115,7 +115,7 @@
         </material>
       </visual>
     </link>
-    <link name='hedgehog/ground_truth/odometry_sensorgt_link'>
+    <link name='gazebo-octa/ground_truth/odometry_sensorgt_link'>
       <pose>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>0 0 0 0 -0 0</pose>
@@ -130,8 +130,8 @@
         </inertia>
       </inertial>
     </link>
-    <joint name='hedgehog/ground_truth/odometry_sensorgt_joint' type='revolute'>
-      <child>hedgehog/ground_truth/odometry_sensorgt_link</child>
+    <joint name='gazebo-octa/ground_truth/odometry_sensorgt_joint' type='revolute'>
+      <child>gazebo-octa/ground_truth/odometry_sensorgt_link</child>
       <parent>base_link</parent>
       <axis>
         <xyz>0 0 1</xyz>
@@ -144,7 +144,7 @@
         <dynamics>
           <damping>1.0</damping>
         </dynamics>
-        <use_parent_model_frame>3</use_parent_model_frame>
+        <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
       <physics>
         <ode>
@@ -152,7 +152,7 @@
         </ode>
       </physics>
     </joint>
-    <link name='hedgehog/imu_link'>
+    <link name='gazebo-octa/imu_link'>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
         <mass>0.15</mass>
@@ -171,8 +171,8 @@
         <update_rate>1000.0</update_rate>
       </sensor>
     </link>
-    <joint name='hedgehog/imu_joint' type='revolute'>
-      <child>hedgehog/imu_link</child>
+    <joint name='gazebo-octa/imu_joint' type='revolute'>
+      <child>gazebo-octa/imu_link</child>
       <parent>base_link</parent>
       <axis>
         <xyz>0 0 1</xyz>
@@ -185,7 +185,7 @@
         <dynamics>
           <damping>1.0</damping>
         </dynamics>
-        <use_parent_model_frame>3</use_parent_model_frame>
+        <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
       <physics>
         <ode>
@@ -194,7 +194,7 @@
       </physics>
     </joint>
 <!--
-    <link name='hedgehog/imugt_link'>
+    <link name='gazebo-octa/imugt_link'>
       <pose>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>0 0 0 0 -0 0</pose>
@@ -209,8 +209,8 @@
         </inertia>
       </inertial>
     </link>
-    <joint name='hedgehog/imugt_joint' type='revolute'>
-      <child>hedgehog/imugt_link</child>
+    <joint name='gazebo-octa/imugt_joint' type='revolute'>
+      <child>gazebo-octa/imugt_link</child>
       <parent>base_link</parent>
       <axis>
         <xyz>0 0 1</xyz>
@@ -224,7 +224,7 @@
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
-        <use_parent_model_frame>3</use_parent_model_frame>
+        <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
     </joint>
 -->
@@ -264,7 +264,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://hedgehog_with_standoffs/meshes/iris_prop_ccw.dae</uri>
+            <uri>model://gazebo-octa_with_standoffs/meshes/iris_prop_ccw.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -290,7 +290,7 @@
         <dynamics>
           <damping>0.004</damping>
         </dynamics>
-        <use_parent_model_frame>3</use_parent_model_frame>
+        <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
       <physics>
         <ode>
@@ -334,7 +334,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://hedgehog_with_standoffs/meshes/iris_prop_ccw.dae</uri>
+            <uri>model://gazebo-octa_with_standoffs/meshes/iris_prop_ccw.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -360,7 +360,7 @@
         <dynamics>
           <damping>0.004</damping>
         </dynamics>
-        <use_parent_model_frame>3</use_parent_model_frame>
+        <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
       <physics>
         <ode>
@@ -404,7 +404,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://hedgehog_with_standoffs/meshes/iris_prop_cw.dae</uri>
+            <uri>model://gazebo-octa_with_standoffs/meshes/iris_prop_cw.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -430,7 +430,7 @@
         <dynamics>
           <damping>0.004</damping>
         </dynamics>
-        <use_parent_model_frame>3</use_parent_model_frame>
+        <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
       <physics>
         <ode>
@@ -474,7 +474,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://hedgehog_with_standoffs/meshes/iris_prop_cw.dae</uri>
+            <uri>model://gazebo-octa_with_standoffs/meshes/iris_prop_cw.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -500,7 +500,7 @@
         <dynamics>
           <damping>0.004</damping>
         </dynamics>
-        <use_parent_model_frame>3</use_parent_model_frame>
+        <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
       <physics>
         <ode>
@@ -545,7 +545,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://hedgehog_with_standoffs/meshes/iris_prop_cw.dae</uri>
+            <uri>model://gazebo-octa_with_standoffs/meshes/iris_prop_cw.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -571,7 +571,7 @@
         <dynamics>
           <damping>0.004</damping>
         </dynamics>
-        <use_parent_model_frame>3</use_parent_model_frame>
+        <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
       <physics>
         <ode>
@@ -615,7 +615,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://hedgehog_with_standoffs/meshes/iris_prop_cw.dae</uri>
+            <uri>model://gazebo-octa_with_standoffs/meshes/iris_prop_cw.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -641,7 +641,7 @@
         <dynamics>
           <damping>0.004</damping>
         </dynamics>
-        <use_parent_model_frame>3</use_parent_model_frame>
+        <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
       <physics>
         <ode>
@@ -685,7 +685,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://hedgehog_with_standoffs/meshes/iris_prop_ccw.dae</uri>
+            <uri>model://gazebo-octa_with_standoffs/meshes/iris_prop_ccw.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -711,7 +711,7 @@
         <dynamics>
           <damping>0.004</damping>
         </dynamics>
-        <use_parent_model_frame>3</use_parent_model_frame>
+        <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
       <physics>
         <ode>
@@ -755,7 +755,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://hedgehog_with_standoffs/meshes/iris_prop_ccw.dae</uri>
+            <uri>model://gazebo-octa_with_standoffs/meshes/iris_prop_ccw.dae</uri>
           </mesh>
         </geometry>
         <material>
@@ -781,7 +781,7 @@
         <dynamics>
           <damping>0.004</damping>
         </dynamics>
-        <use_parent_model_frame>3</use_parent_model_frame>
+        <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
       <physics>
         <ode>

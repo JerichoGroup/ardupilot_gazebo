@@ -84,9 +84,9 @@
       </link>
     </model>
 
-    <model name="hedgehog_demo">
+    <model name="gazebo-octa_demo">
       <include>
-        <uri>model://hedgehog_with_ardupilot</uri>
+        <uri>model://gazebo-octa_with_ardupilot</uri>
       </include>
     </model>
   </world>
