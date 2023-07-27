@@ -229,7 +229,7 @@
     </joint>
 -->
     <link name='rotor_0'>
-      <pose>0.13 -0.22 0.023 0 -0 0</pose>
+      <pose>0.13 -0.822 0.023 0 -0 0</pose>
       <inertial>
         <pose>0 0 0 0 -0 0</pose>
         <mass>0.025</mass>
@@ -369,7 +369,7 @@
       </physics>
     </joint>
     <link name='rotor_2'>
-      <pose>0.13 0.22 0.023 0 -0 0</pose>
+      <pose>0.13 0.322 0.023 0 -0 0</pose>
       <inertial>
         <pose>0 0 0 0 -0 0</pose>
         <mass>0.025</mass>
