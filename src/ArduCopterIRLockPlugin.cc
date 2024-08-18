@@ -54,6 +54,32 @@ GZ_REGISTER_SENSOR_PLUGIN(ArduCopterIRLockPlugin)
 
 namespace gazebo
 {
+  /// \brief Obtains a parameter from sdf.
+  /// \param[in] _sdf Pointer to the sdf object.
+  /// \param[in] _name Name of the parameter.
+  /// \param[out] _param Param Variable to write the parameter to.
+  /// \param[in] _default_value Default value, if the parameter not available.
+  /// \param[in] _verbose If true, gzerror if the parameter is not available.
+  /// \return True if the parameter was found in _sdf, false otherwise.
+  template<class T>
+  bool getSdfParam(sdf::ElementPtr _sdf, const std::string &_name,
+    T &_param, const T &_defaultValue, const bool &_verbose = false)
+  {
+    if (_sdf->HasElement(_name))
+    {
+      _param = _sdf->GetElement(_name)->Get<T>();
+      return true;
+    }
+
+    _param = _defaultValue;
+    if (_verbose)
+    {
+      gzerr << "[ArduPilotPlugin] Please specify a value for parameter ["
+        << _name << "].\n";
+    }
+    return false;
+  }
+
   class ArduCopterIRLockPluginPrivate
   {
     /// \brief Pointer to the parent camera sensor
@@ -72,7 +98,7 @@ namespace gazebo
     public: std::string irlock_addr;
 
     /// \brief Irlock port for receiver socket
-    public: uint16_t irlock_port;
+    public: unsigned irlock_port;
 
     public: int handle;
 
@@ -167,10 +193,10 @@ void ArduCopterIRLockPlugin::Load(sensors::SensorPtr _sensor,
         << std::endl;
     return;
   }
-  this->dataPtr->irlock_addr =
-          _sdf->Get("irlock_addr", static_cast<std::string>("127.0.0.1")).first;
-  this->dataPtr->irlock_addr =
-          _sdf->Get("irlock_port", 9005).first;
+  getSdfParam<std::string>(_sdf, "irlock_addr",
+      this->dataPtr->irlock_addr, "127.0.0.1");
+  getSdfParam<unsigned>(_sdf, "irlock_port",
+      this->dataPtr->irlock_port, 9005);
 
   this->dataPtr->parentSensor->SetActive(true);
 
@@ -207,9 +233,13 @@ void ArduCopterIRLockPlugin::OnNewFrame(const unsigned char * /*_image*/,
     if (!camera->IsVisible(vis))
       continue;
 
+    #if GAZEBO_MAJOR_VERSION < 9
+    ignition::math::Vector2i pt = GetScreenSpaceCoords(
+        vis->GetWorldPose().pos.Ign(), camera);
+    #else 
     ignition::math::Vector2i pt = GetScreenSpaceCoords(
         vis->WorldPose().Pos(), camera);
-
+    #endif 
     // use selection buffer to check if visual is occluded by other entities
     // in the camera view
     Ogre::Entity *entity =
@@ -233,7 +263,11 @@ void ArduCopterIRLockPlugin::OnNewFrame(const unsigned char * /*_image*/,
 
     if (result && result->GetRootVisual() == vis)
     {
+      #if GAZEBO_MAJOR_VERSION < 9
+      this->Publish(vis->GetName(), pt.X(), pt.Y());
+      #else
       this->Publish(vis->Name(), pt.X(), pt.Y());
+      #endif
     }
   }
 }
@@ -267,8 +301,8 @@ void ArduCopterIRLockPlugin::Publish(const std::string &/*_fiducial*/,
   pkt.size_x = static_cast<float>(1);
   pkt.size_y = static_cast<float>(1);
 
-  // std::cerr << "fiducial '" << _fiducial << "':" << _x << ", " << _y
-  //     << ", pos: " << pkt.pos_x << ", " << pkt.pos_y << std::endl;
+//   std::cerr << "fiducial '" << _fiducial << "':" << _x << ", " << _y
+//       << ", pos: " << pkt.pos_x << ", " << pkt.pos_y << std::endl;
 
   struct sockaddr_in sockaddr;
   memset(&sockaddr, 0, sizeof(sockaddr));
